@@ -1,17 +1,25 @@
 <template>
     <div class=''>
-        <div>index</div>
+        <div>临沂~~~</div>
+        <div class="shopList">
+            <ul>
+                <li v-for="item in shopList" :key="item.id">
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
         <hello-world></hello-world>
     </div>
 </template>
 
 <script>
 import HelloWorld from '@/components/HelloWorld'
+import getUserInfos from '@/api/linyi'
 export default {
     components: { HelloWorld },
     data() {
         return {
-
+            shopList: []
         };
     },
     computed: {},
@@ -22,17 +30,27 @@ export default {
     created() {
 
     },
-    mounted() {
+    async mounted() {
+        let data = await getUserInfos()
+        console.log(data)
+        this.shopList = data.data
 
-    },
-    beforeCreate() { }, //生命周期 - 创建之前
-    beforeMount() { }, //生命周期 - 挂载之前
-    beforeUpdate() { }, //生命周期 - 更新之前
-    updated() { }, //生命周期 - 更新之后
-    beforeDestroy() { }, //生命周期 - 销毁之前
-    destroyed() { }, //生命周期 - 销毁完成
-    activated() { }, //如果页面有keep-alive缓存功能，这个函数会触发
+    }
 }
 </script>
 <style lang='scss' scoped>
+.shopList {
+    margin: 20px 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: #00bcd4;
+    li {
+        margin-bottom: 10px;
+        border-radius: 5px;
+        padding: 6px 10px;
+        box-sizing: border-box;
+        list-style: none;
+        background-color: #ffffff;
+    }
+}
 </style>

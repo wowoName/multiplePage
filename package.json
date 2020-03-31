@@ -3,13 +3,14 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve_linyi": "vue-cli-service serve --linyi",
-        "build_linyi": "vue-cli-service build --linyi",
-        "serve_beijing": "vue-cli-service serve --beijing",
-        "build_beijing": "vue-cli-service build --beijing",
+        "serve_linyi": "vue-cli-service serve --mode liniydev --linyi",
+        "build_linyi": "vue-cli-service build --mode linyipro --linyi",
+        "serve_beijing": "vue-cli-service serve --mode beijingdev --beijing",
+        "build_beijing": "vue-cli-service build --mode beijingpro --beijing",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
+        "axios": "^0.19.2",
         "core-js": "^3.6.4",
         "register-service-worker": "^1.6.2",
         "vue": "^2.6.11",
@@ -42,7 +43,10 @@
         "parserOptions": {
             "parser": "babel-eslint"
         },
-        "rules": {}
+        "rules": {
+            "no-console": "off",
+            "no-debugger": "off"
+        }
     },
     "browserslist": [
         "> 1%",
