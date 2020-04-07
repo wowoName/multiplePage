@@ -22,3 +22,12 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 配置说明
+```
+动态配置 环境变量代理
+
+开启cdn  
+
+开启gzip
+```

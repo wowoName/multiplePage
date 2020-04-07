@@ -7,6 +7,8 @@
                     {{item.name}}
                 </li>
             </ul>
+            <input type="button" value="说句话" @click="setName(+ new Date)">
+            <span>{{$store.state.name}}</span>
         </div>
         <hello-world></hello-world>
     </div>
@@ -15,6 +17,11 @@
 <script>
 import HelloWorld from '@/components/HelloWorld'
 import getUserInfos from '@/api/linyi'
+
+import say from '@/utils/common'
+import {
+    mapMutations
+} from 'vuex'
 export default {
     components: { HelloWorld },
     data() {
@@ -25,15 +32,17 @@ export default {
     computed: {},
     watch: {},
     methods: {
-
+        ...mapMutations(['setName']),
+        sayHello({ msg = "dddddd", name = 'mm', ...arg }) {
+            console.log(msg)
+        }
     },
     created() {
-
     },
     async mounted() {
         let data = await getUserInfos()
-        console.log(data)
         this.shopList = data.data
+        this.sayHello({ msg: "ddd", name: "GG", age: 10 })
 
     }
 }

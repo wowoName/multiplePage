@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve_linyi": "vue-cli-service serve --mode liniydev --linyi",
+        "serve_linyi": "vue-cli-service serve --mode linyidev --linyi",
         "build_linyi": "vue-cli-service build --mode linyipro --linyi",
         "serve_beijing": "vue-cli-service serve --mode beijingdev --beijing",
         "build_beijing": "vue-cli-service build --mode beijingpro --beijing",
@@ -25,6 +25,7 @@
         "@vue/cli-plugin-vuex": "~4.2.0",
         "@vue/cli-service": "~4.2.0",
         "babel-eslint": "^10.0.3",
+        "compression-webpack-plugin": "^3.1.0",
         "eslint": "^6.7.2",
         "eslint-plugin-vue": "^6.1.2",
         "node-sass": "^4.12.0",
@@ -45,7 +46,8 @@
         },
         "rules": {
             "no-console": "off",
-            "no-debugger": "off"
+            "no-debugger": "off",
+            "no-unused-vars": "off"
         }
     },
     "browserslist": [

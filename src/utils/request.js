@@ -8,8 +8,11 @@ const HttpRequest = axios.create({
 });
 
 //第一个匹配到的 url地址
+console.log(process.env)
+debugger
 let targets = Object.keys(process.env).filter(v => v.includes('VUE_APP_URL'))[0]
 let proxys = targets.split('_').pop();
+
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? process.env[targets] : "/" + (proxys.toLowerCase());
 console.log('========ajax============');
 console.log(process.env[targets], proxys)
