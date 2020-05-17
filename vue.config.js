@@ -1,6 +1,8 @@
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  //gzip 压缩
  const CompressionPlugin = require('compression-webpack-plugin');
+ //打包分析
+ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
  const cdn = {
      css: [],
      js: [
@@ -17,7 +19,6 @@
  // 多项目入口文件配置
  const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
  let appName = process.argv.slice(0).reverse()[0].replace('--', '');
-
 
  //根据启动项目设置文件主入口地址
  let outputPath = appName === 'linyi' ? 'linyi' : 'beijing';
@@ -46,6 +47,7 @@
  module.exports = {
      publicPath: IS_PROD ? '../' + outputPath + '/' : './',
      outputDir: 'dist/' + outputPath,
+
      assetsDir: 'static',
      lintOnSave: true,
      runtimeCompiler: false,
@@ -55,7 +57,7 @@
          host: "0.0.0.0",
          port: 8088, // 端口号
          https: false,
-         open: false,
+         open: true,
          hotOnly: true,
          proxy: proxyObj //使用动态代理
      },
@@ -65,6 +67,19 @@
          }
      },
      configureWebpack: config => {
+         config.plugins.forEach(v => {
+             if (v instanceof HtmlWebpackPlugin) {
+                 console.log('这里IDE一个')
+             }
+         })
+
+         if (IS_PROD) {
+             //  config.optimization = {
+             //      splitChunks: {
+
+             //      }
+             //  }
+         }
 
      },
      chainWebpack: config => {
@@ -86,7 +101,6 @@
                  args[0].title = "生产"
                  return args
              });
-             console.log(config.plugin('html-index'))
 
              //开启gzip压缩 ---部署 nginx 开启gzip命令
              config
@@ -99,16 +113,19 @@
                      minRatio: 0.8,
                      cache: true
                  }]);
+             //添加打包分析
+             config.plugin("webpack-report").use(BundleAnalyzerPlugin, [{
+                 analyzerMode: "static"
+             }]);
 
          } else {
              //开发环境 修改html-webpack-plugin 模板信息
              config.plugin('html-index').tap(args => {
                  args[0].title = "开发"
-                 args[0].faicon = ""
+                 args[0].favicon = false
                  return args
              })
          }
-
 
      }
 

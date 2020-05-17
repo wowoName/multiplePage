@@ -8,6 +8,11 @@ const routes = [{
     name: 'index',
     component: () =>
         import ( /* webpackChunkName: "about" */ '@/views/linyi/pages/Index.vue')
+}, {
+    path: '/canvas',
+    name: 'canvas',
+    component: () =>
+        import ( /* webpackChunkName: "about" */ '@/views/linyi/pages/CanvasDemo.vue')
 }, ]
 
 const router = new VueRouter({
